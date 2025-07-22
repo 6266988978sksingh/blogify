@@ -1,0 +1,126 @@
+
+<head>
+ 
+
+  <!-- Google Fonts -->
+ 
+  <style>
+    body {
+      background-color: #292929;
+      color: #fff;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .navbar {
+      background-color: #1f1f1f;
+    }
+
+    .navbar-brand {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.8rem;
+      color: #fff !important;
+    }
+
+    .nav-link {
+      color: #ccc !important;
+      font-family: 'Raleway', sans-serif;
+    }
+    .nav-item{
+      margin-left: 2rem !important;
+      margin-right: 2rem !important;
+    }
+
+    .nav-link:hover {
+      color: #fff !important;
+    }
+
+    .dropdown-menu {
+      background-color: #292929;
+      border: 1px solid #616161;
+    }
+
+    .dropdown-item {
+      color: #ccc;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .dropdown-item:hover {
+      background-color: #616161;
+      color: #fff;
+    }
+    
+      /* Dropdown arrow ko hide karne ke liye */
+.dropdown-toggle::after {
+    display: none !important;
+}
+.dropdown-toggle img{
+  object-fit: cover;
+
+}
+.dropdown-toggle img:hover{
+  transform: scale(2.3);
+  transition: transform 0.3s ease;
+}
+
+    
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid" style="padding-left: 3rem; padding-right: 3rem;">
+      <!-- Brand -->
+      <a class="navbar-brand" href="#">Blogify</a>
+
+      <!-- Mobile Toggle -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar Links -->
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav d-flex flex-row gap-3 ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+         <% if (locals.user) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/blog/addnew">Add Blog</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <img src="/images/<%= user.profileImageURL%>" width="30px" height="30" class="rounded-circle me-2 bg-cover" alt=".."><%= user.fulName%>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink"
+              style="left: -50px; width: 100px;">
+              <a class="dropdown-item" href="/user/logout">LogOut</a>
+            </div>
+          </li>
+         <% } else { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/user/signup">Signup</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/user/login">Login</a>
+          </li>
+          <% } %>
+         
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- jQuery & Bootstrap JS -->
+
+</body>
+
+<% if (locals.error) { %>
+  <div class="alert alert-danger" role="alert">
+    <%= locals.error %>
+  </div>
+<% } %>
+
+

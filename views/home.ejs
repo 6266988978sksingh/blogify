@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('./partials/head') %>
+  <title>Homepage</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #292929;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .card-custom-modern {
+      background-color: #1f1f1f;
+      border: 1px solid #616161;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      margin: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .card-custom-modern:hover {
+      transform: translateY(-8px);
+    }
+
+    .card-custom-modern .card-img-top {
+      width: 100%;
+      height: 200px; /* Adjust this for consistent height */
+      object-fit: cover; /* This will ensure the image covers the area without distorting */
+    }
+
+    .card-custom-modern .card-body {
+      padding: 1.5rem;
+    }
+
+    .card-custom-modern .card-title {
+      font-family: 'Oswald', sans-serif;
+      color: #fff;
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-custom-modern .card-text {
+      font-family: 'Raleway', sans-serif;
+      color: #ccc;
+      font-size: 0.95rem;
+    }
+
+    .btn-custom {
+      background-color: #fff;
+      color: #000;
+      padding: 0.5rem 1rem;
+      border: none;
+      font-weight: bold;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-custom:hover {
+      background-color: #ddd;
+      color: #000;
+    }
+
+    /* Masonry grid layout */
+    .blog-grid {
+      padding: 2rem;
+    }
+
+    .masonry {
+      /* Responsive: 3 cards in a row on large screens */
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      column-count: 3; /* Kitne columns chahiye */
+      column-gap: 0; 
+    }
+
+    @media (max-width: 767px) {
+      .masonry {
+        grid-template-columns: 1fr; /* 1 card per row on smaller screens */
+      }
+    }
+    @media (max-width: 991px) {
+      .masonry {
+        column-count: 2; /* 2 cards per row on medium screens */
+      }
+    }
+
+    @media (max-width: 767px) {
+      .masonry {
+        column-count: 1; /* 1 card per row on smaller screens */
+      }
+    }
+
+  
+  </style>
+</head>
+<body>
+  <%- include('./partials/nav', { user: user }) %>
+
+  <div class="container blog-grid">
+    <div class="masonry ">
+      <% blogs.forEach(blog => { %>
+        <div class="card-custom-modern">
+          <img src="/uploads/<%= blog.coverImageURL %>" class="card-img rounded" alt="Blog Image">
+          <div class="card-body">
+            <h5 class="card-title"><%= blog.title %></h5>
+            <p class="card-text"><%= blog.body.length > 100 ? blog.body.slice(0, 100) + '...' : blog.body %></p>
+            <a href="/blog/<%= blog._id %>" class="btn-custom">Show More</a>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+
+  <%- include('./partials/script') %>
+</body>
+</html>
